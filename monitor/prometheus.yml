@@ -1,0 +1,52 @@
+# my global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+scrape_configs:
+    - job_name: prometheus
+      static_configs:
+        - targets: ['prometheus:9090']
+          labels:
+            instance: prometheus
+
+    - job_name: pushGateway
+      static_configs:
+        - targets: ['pushGateway:9091']
+          labels:
+            instance: pushGateway
+
+    - job_name: cadvisor
+      static_configs:
+              #        - targets: ['cadvisor-1:8080']
+              #  labels:
+              #  instance: cadvisor1
+              #  - targets: ['cadvisor-2:8080']
+              #  labels:
+              #  instance: cadvisor2
+        - targets: ['cadvisor-1:8080']
+          labels:
+            instance: cadvisor1
+
+    - job_name: nodeexporter
+      static_configs:
+              #   - targets: ['node-exporter-1:9100']
+              # labels:
+              # instance: nodeexporter1
+              #      - targets: ['node-exporter-2:9100']
+              # labels:
+              #   instance: nodeexporter2
+        - targets: ['node-exporter-1:9100']
+          labels:
+            instance: nodeexporter1
+
+    - job_name: hyperledger_orderer
+      static_configs:
+      - targets: ['orderer0_example_com:8443', 'orderer1_example_com:8443', 'orderer2_example_com:8443', 'orderer3_example_com:8443']
+    
+    - job_name: hyperledger_peer
+      static_configs:
+      - targets: ['peer0_org1_example_com:9443', 'peer0_org2_example_com:9443', 'peer0_org3_example_com:9443', 'peer0_org4_example_com:9443']
+
+

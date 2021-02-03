@@ -1,0 +1,55 @@
+version: '3'
+
+networks:
+    net_test:
+
+services:
+    nodeexporter:
+          container_name: nodeexporter
+          image: prom/node-exporter
+          ports:
+            - 9100:9100
+          volumes:
+            - /proc:/host/proc
+            - /sys:/host/sys
+            - /:/rootfs
+          
+    cadvisor:
+          container_name: cadvisor
+          image: google/cadvisor
+          ports:
+            - 8080:8080
+          volumes:
+            - /:/rootfs:ro
+            - /var/run:/var/run:ro
+            - /sys:/sys:ro
+            - /var/lib/docker/:/var/lib/docker:ro
+            - /dev/disk/:/dev/disk:ro
+          
+    prometheus:
+          container_name: prometheus
+          image: prom/prometheus
+          ports:
+            - "9090:9090"
+          volumes:
+            - /root/monitor/prometheus.yml:/etc/prometheus/prometheus.yml
+
+    grafana:
+          container_name: grafana
+          image: grafana/grafana
+          volumes:
+            - grafana:/var/lib/grafana
+          ports:
+            - "3000:3000"
+          depends_on:
+            - prometheus
+
+    pushGateway:
+          image: prom/pushgateway
+          container_name: pushGateway
+          ports:
+            - "9091:9091"
+
+networks:
+  caliper-overlay:
+    external: true
