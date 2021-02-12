@@ -1,35 +1,38 @@
-# Introduction
-This is to deploy fabric, caliper and monitor blockchain metrics.
+# Hyperledger Fabric Deployment
+This repository is about how to deploy Hyperledger Fabric, Hyperledger Caliper and Monitor tools.
 
-## 1. Config environment on all hosts
-At first, we need to config the environment of each VM. 
-On one VM, we can run install.sh directly.
+### Config environment on all hosts
+At first, we need to config the environment on each VM. 
+
+On one VM, we can run `install.sh` directly which indludes `install go, docker, docker-compose, Nodejs, Fabric, node-gyp etc.`
 
 If Use Ansible for multiple VMs.
+
 a. Copy Install.sh to each host 
 
-ansible target-ip -m copy -a "src=/root/install.sh dest=/root/install.sh mode=0755"
+`ansible target-ip -m copy -a "src=/root/install.sh dest=/root/install.sh mode=0755"`
 
 b. Run Install.sh on each host
 
-ansible target-ip -m shell -a "/root/go.sh" 
+`ansible target-ip -m shell -a "/root/go.sh"`
 
-## 2. Install Caliper on the manager host. 
-Run Install_Caliper.sh
+### Install Caliper on the manager host. 
+We can install Caliper on manager host. 
+Run `Install_Caliper.sh` 
 
-## 3. Docker swarm init and join
+### Docker swarm init and join
 a. On manager host: 
 docker swarm init --advertise-addr manager-host-IP
 
 b. On each host:
 docker swarm join (Ansible)
 
-## 4. Start Monitor 
+### Start Monitor 
 a. Set cAdvisor and nodeExporter deployment place in prometheus.yml and swarm-compose.yml 
 
 b. Run start.sh 
 
-## 5. Prepare fabric network 
+### Prepare fabric network 
 a. Define peer and orderer nodes number in crypto-config.yaml and configtx.yaml
 
 b. Run generate.sh to generate crypto files 
@@ -44,12 +47,12 @@ e. Define fabric-ccp-go-tls.yaml files.
 
 Including Caliper clients, channels, organizations, orderer, peer, ca configuration. 
 
-## 6. Prepare caliper test benchmark and config files
+### Prepare caliper test benchmark and config files
 a. Prepare init.js and query.js according to chaincode
 
 b. Define test configurations in config.yaml 
 
-## 7. Run the test
+### Run the test
 a. On manager host, run Caliper test.
 npx caliper benchmark run --caliper-benchconfig benchmarks/samples/fabric/marbles/configs.yaml --caliper-networkconfig networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/fabric-ccp-go-tls.yaml --caliper-workspace .
 
