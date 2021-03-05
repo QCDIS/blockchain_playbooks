@@ -1,0 +1,7 @@
+- hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+  
+  - name: install 
+    shell: bash {{ playbook_dir }}../install.sh
