@@ -34,7 +34,7 @@
     become_user: "root"
     docker_swarm:
       state: join
-      join_token: "{{ hostvars['join_cmd_holder']['cmd'].swarm_facts.JoinTokens.Manager }}"
+      join_token: "{{ hostvars['join_cmd_holder']['cmd'] }}"
       advertise_addr: "{{ ansible_host }}:2377"
       remote_addrs: ["{{ hostvars[groups.swarm_manager_prime[0]]['ansible_host'] }}:2377" ]
     retries: 3
