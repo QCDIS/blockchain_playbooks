@@ -1,5 +1,6 @@
 ---       
 - hosts: client
+  become: yes
   tasks:    
     
   - name: Init a new swarm with default parameters
@@ -15,8 +16,8 @@
         
         
 - hosts: workers
+  become: yes
   tasks: 
-      
 
   - name: print K8S_TOKEN
     debug:
