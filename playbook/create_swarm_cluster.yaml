@@ -1,19 +1,33 @@
 ---       
-- hosts: master
+- hosts: client
   tasks:    
     
   - name: Init a new swarm with default parameters
     docker_swarm:
       state: present
- 
+    register: join_cmd
+    
+    
+  - name: Add join cmd to dummy host
+    add_host:
+      name:   "join_cmd_holder"
+      cmd:  "{{ join_cmd.stdout }}"
         
         
-- hosts: worker
+- hosts: workers
   tasks: 
-  
-  - name: Add nodes
-    docker_swarm:
-      state: join
-      advertise_addr: 192.168.1.2
-      join_token: SWMTKN-1--xxxxx
-      remote_addrs: [ '192.168.1.1:2377' ]
+      - name: print K8S_TOKEN
+      debug:
+        msg: "[Worker] K8S_TOKEN_HOLDER K8S token is {{ hostvars['join_cmd_holder']['cmd'] }}"
+
+
+#   - name: "Join as a manager"
+#     become: yes
+#     become_user: "root"
+#     docker_swarm:
+#       state: join
+#       join_token: "{{ hostvars[groups.swarm_manager_prime[0]]['result'].swarm_facts.JoinTokens.Manager }}"
+#       advertise_addr: "{{ ansible_host }}:2377"
+#       remote_addrs: ["{{ hostvars[groups.swarm_manager_prime[0]]['ansible_host'] }}:2377" ]
+#     retries: 3
+#     delay: 15
