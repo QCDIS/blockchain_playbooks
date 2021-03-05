@@ -3,5 +3,6 @@
   gather_facts: no
   tasks:
   
+  
   - name: install 
-    shell: bash {{ playbook_dir }}/../install.sh
+    shell: ls {{ playbook_dir }}  #bash {{ playbook_dir }}/../install.sh
