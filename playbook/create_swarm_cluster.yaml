@@ -7,7 +7,12 @@
     docker_swarm:
       state: present
     register: join_cmd
-    
+
+
+  - name: print TOKEN
+    debug:
+      msg: "TOKEN_HOLDER K8S token is {{ join_cmd.stdout }}"
+      
     
   - name: Add join cmd to dummy host
     add_host:
@@ -19,7 +24,7 @@
   become: yes
   tasks: 
 
-  - name: print K8S_TOKEN
+  - name: print TOKEN
     debug:
       msg: "[Worker] K8S_TOKEN_HOLDER K8S token is {{ hostvars['join_cmd_holder']['cmd'] }}"
 
