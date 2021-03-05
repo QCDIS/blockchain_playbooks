@@ -11,7 +11,7 @@
 
   - name: print TOKEN
     debug:
-      var: {{ join_cmd.stdout }}
+      var: join_cmd
       
     
   - name: Add join cmd to dummy host
