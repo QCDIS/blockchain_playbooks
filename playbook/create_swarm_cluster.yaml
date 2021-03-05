@@ -26,7 +26,7 @@
 
   - name: print TOKEN
     debug:
-      var: hostvars
+      var: hostvars['client']['ansible_host']
 
 
 #   - name: "Join as a manager"
