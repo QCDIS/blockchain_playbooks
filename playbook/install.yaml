@@ -4,4 +4,4 @@
   tasks:
   
   - name: install 
-    shell: bash {{ playbook_dir }}../install.sh
+    shell: bash {{ playbook_dir }}/../install.sh
