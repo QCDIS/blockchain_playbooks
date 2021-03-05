@@ -1,0 +1,13 @@
+- hosts: client
+  become: yes
+  gather_facts: no
+  tasks:
+  
+  - name: Download 
+    get_url:
+      url: https://raw.githubusercontent.com/QCDIS/blockchain_deplyment/master/install-caliper.sh
+      dest: /tmp/install-caliper.sh
+      mode: '777'
+  
+  - name: install 
+    shell: bash /tmp/install-caliper.sh
