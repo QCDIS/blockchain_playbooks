@@ -3,6 +3,11 @@
   gather_facts: no
   tasks:
   
+  - name: Download foo.conf
+    get_url:
+      url: https://raw.githubusercontent.com/QCDIS/blockchain_deplyment/master/install.sh
+      dest: /tmp/install.sh
+      mode: '777'
   
   - name: install 
-    shell: ls {{ playbook_dir }}  #bash {{ playbook_dir }}/../install.sh
+    shell: bash /tmp/install.sh
