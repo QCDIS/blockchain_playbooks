@@ -6,7 +6,7 @@
   - name: Init a new swarm with default parameters
     docker_swarm:
       state: present
-    register: join_cmd
+    register: join_cmd.swarm_facts.JoinTokens.Manager
 
 
   - name: print TOKEN
@@ -17,7 +17,7 @@
   - name: Add join cmd to dummy host
     add_host:
       name:   "join_cmd_holder"
-      cmd:  "{{ join_cmd.stdout }}"
+      cmd:  "{{ join_cmd.swarm_facts.JoinTokens.Manager }}"
         
         
 - hosts: workers
