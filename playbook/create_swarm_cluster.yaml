@@ -11,7 +11,7 @@
 
   - name: print TOKEN
     debug:
-      msg: "TOKEN_HOLDER K8S token is {{ join_cmd.stdout }}"
+      var: {{ join_cmd.stdout }}
       
     
   - name: Add join cmd to dummy host
