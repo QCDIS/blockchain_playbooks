@@ -6,12 +6,12 @@
   - name: Init a new swarm with default parameters
     docker_swarm:
       state: present
-    register: join_cmd.swarm_facts.JoinTokens.Manager
+    register: join_cmd
 
 
   - name: print TOKEN
     debug:
-      var: join_cmd
+      var: join_cmd.swarm_facts.JoinTokens.Manager
       
     
   - name: Add join cmd to dummy host
