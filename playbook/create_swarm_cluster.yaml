@@ -29,13 +29,13 @@
       var: hostvars['client']['ansible_host']
 
 
-#   - name: "Join as a manager"
-#     become: yes
-#     become_user: "root"
-#     docker_swarm:
-#       state: join
-#       join_token: "{{ hostvars['join_cmd_holder']['cmd'] }}"
-#       advertise_addr: "{{ ansible_host }}:2377"
-#       remote_addrs: ["{{ hostvars[groups.swarm_manager_prime[0]]['ansible_host'] }}:2377" ]
-#     retries: 3
-#     delay: 15
+  - name: "Join as a manager"
+    become: yes
+    become_user: "root"
+    docker_swarm:
+      state: join
+      join_token: "{{ hostvars['join_cmd_holder']['cmd'] }}"
+      advertise_addr: "{{ ansible_host }}:2377"
+      remote_addrs: ["{{  hostvars['client']['ansible_host'] }}:2377" ]
+    retries: 3
+    delay: 15
