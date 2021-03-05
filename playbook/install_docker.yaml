@@ -53,7 +53,10 @@
         update_cache: yes       
         
     - name: Update and install docker-ce
-      apt: update_cache=yes name=docker-ce state=latest              
+      apt: update_cache=yes name=docker-ce state=latest    
+      
+    - name: Update and install pip
+      apt: update_cache=yes name= python3-pip state=latest   
       
     - name: Change data-root location in /etc/docker/daemon.json if mount exists
       shell: |
