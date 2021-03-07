@@ -1,0 +1,13 @@
+- hosts: client
+  become: yes
+  gather_facts: no
+  tasks:
+  
+  - name: Benchmark 
+    get_url:
+      url: https://raw.githubusercontent.com/QCDIS/blockchain_deplyment/master/caliper-benchmark.sh
+      dest: /tmp/caliper-benchmark.sh
+      mode: '777'
+  
+  - name: install 
+    shell: bash /tmp/caliper-benchmark.sh
