@@ -1,8 +1,9 @@
+---
 - hosts: workers
   become: yes
   tasks:
   - name: create folder
-    cmd: mkdir -p /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config
+    command: mkdir -p /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config
   
 - hosts: client
   become: yes
