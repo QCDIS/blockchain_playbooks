@@ -4,13 +4,13 @@ cd /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1
 
 cd ~
 
-ssh Node0 "mkdir -p /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/"
+ssh compute1 "mkdir -p /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/"
 scp -r /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/ compute1:/root/caliper-bench/caliper-benchmarks-ben/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/
 
-ssh Node1 "mkdir -p /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/"
+ssh compute2 "mkdir -p /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/"
 scp -r /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/ compute2:/root/caliper-bench/caliper-benchmarks-ben/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/
 
-ssh Node2 "mkdir -p /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/"
+ssh compute3 "mkdir -p /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/"
 scp -r /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/ compute3:/root/caliper-bench/caliper-benchmarks-ben/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/
 
 cd /root/caliper-bench/azure-3nodes/monitor
