@@ -3,7 +3,7 @@
   gather_facts: no
   tasks:
   
-  - name: Download foo.conf
+  - name: Download install.sh
     get_url:
       url: https://raw.githubusercontent.com/QCDIS/blockchain_deplyment/master/install.sh
       dest: /tmp/install.sh
