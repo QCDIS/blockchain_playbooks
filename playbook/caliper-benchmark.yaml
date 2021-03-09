@@ -16,7 +16,7 @@
 
 - hosts: workers
   tasks:
-    - name: Transfer file from client to workers
+    - name: Transfer files from client to workers
       synchronize:
         src: /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/
         dest: /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/
