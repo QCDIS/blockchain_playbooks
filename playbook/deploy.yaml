@@ -1,9 +1,28 @@
-- hosts: workers
+---
+- name: Exchange Keys between servers
   become: yes
-  gather_facts: no
-  tasks:    
-   - name: Transfer file from client to workers
-     synchronize:
-       src: /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/configtx.yaml
-       dest: /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/configtx.yaml
-     delegate_to: client
+  hosts: client
+  tasks:
+    - name: SSH KeyGen command
+      tags: run
+      shell: > 
+        ssh-keygen -q -b 2048 -t rsa -N "" -C "creating SSH" -f ~/.ssh/id_rsa
+        creates="~/.ssh/id_rsa"
+
+    - name: Fetch the keyfile from one server to another
+      tags: run
+      fetch: 
+        src: "~/.ssh/id_rsa.pub"
+        dest: "buffer/{{ansible_hostname}}-id_rsa.pub"
+        flat: yes
+
+    - name: Copy the key add to authorized_keys using Ansible module
+      tags: run
+      authorized_key:
+        user: root
+        state: present
+        key: "{{ lookup('file','buffer/{{item.dest}}-id_rsa.pub')}}"
+      when: "{{ item.dest != ansible_hostname }}"
+      with_items: 
+        - { dest: "{{groups['app'][1]}}"}
+        - { dest: "{{groups['app'][0]}}"} 
