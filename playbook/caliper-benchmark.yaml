@@ -2,8 +2,7 @@
 - hosts: workers
   become: yes
   tasks:
-  - name: create folder
-    shell: mkdir -p /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config
+ 
   
 - hosts: client
   become: yes
@@ -16,11 +15,14 @@
 
 - hosts: workers
   tasks:
-    - name: Transfer files from client to workers
-      synchronize:
-        src: /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/
-        dest: /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/
-      delegate_to: client
+   - name: create folder
+    shell: mkdir -p /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config
+    
+   - name: Transfer files from client to workers
+     synchronize:
+       src: /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/
+       dest: /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/
+     delegate_to: client
 
 # - hosts: client
 #   become: yes
