@@ -4,20 +4,21 @@
   hosts: all
   tasks:
   
-  - name: generating public/private rsa key pair  #生成公钥和私钥
+  - name: generating public/private rsa key pair  
     shell: ssh-keygen -t rsa -b 2048 -N '' -f /root/.ssh/id_rsa
-  - name: delete /tmp/ssh/ dir
-    file: path=/tmp/ssh/ state=absent
-    run_once: true
     
-  - name: fetch copy  #从各宿主机将公钥拷贝到本机
+#   - name: delete /tmp/ssh/ dir
+#     file: path=/tmp/ssh/ state=absent
+#     run_once: true
+    
+  - name: fetch copy  
     fetch: src=/root/.ssh/id_rsa.pub dest=/tmp/ssh/
     
-  - name: append file authorized_keys.log  #将各个公钥合并成一个文件
+  - name: append file authorized_keys.log  
     shell: find /tmp/ssh/* -type f -exec sh -c 'cat {}>>/tmp/ssh/authorized_keys.log' \;
     run_once: true
     
-  - name: copy authorized_keys  #将合成的公钥进行分发
+  - name: copy authorized_keys  
     copy: src=/tmp/ssh/authorized_keys.log dest=/root/.ssh/authorized_keys mode=0600
     tags:
      - install ssh
