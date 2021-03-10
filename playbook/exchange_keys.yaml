@@ -4,8 +4,11 @@
   hosts: all
   tasks:
   
-  - name: generating public/private rsa key pair  
-    shell: ssh-keygen -t rsa -b 2048 -N '' -f /root/.ssh/id_rsa
+  - name: SSH KeyGen command
+    tags: run
+    shell: > 
+      ssh-keygen -q -b 2048 -t rsa -N "" -C "creating SSH" -f ~/.ssh/id_rsa
+      creates="~/.ssh/id_rsa"
     
 #   - name: delete /tmp/ssh/ dir
 #     file: path=/tmp/ssh/ state=absent
@@ -26,8 +29,7 @@
       src: /tmp/ssh/authorized_keys.log 
       dest: /root/.ssh/authorized_keys 
       mode: 0600
-    tags:
-     - install ssh
+    tags: install ssh
      
 #     - name: SSH KeyGen command
 #       tags: run
