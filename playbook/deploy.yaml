@@ -21,7 +21,7 @@
       authorized_key:
         user: vm-user
         state: present
-        key: "{{ lookup('file','buffer/{{item.dest}}-id_rsa.pub')}}"
-      when: "{{ item.dest != ansible_hostname }}"
+        key: "{{ lookup('file','buffer/{{item}}-id_rsa.pub')}}"
+      when: "{{ item != ansible_hostname }}"
       with_items: 
         - "{{ groups['all'] }}"
