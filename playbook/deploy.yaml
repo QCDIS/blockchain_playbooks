@@ -15,9 +15,8 @@
         src: "~/.ssh/id_rsa.pub"
         dest: "buffer/{{ansible_hostname}}-id_rsa.pub"
         flat: yes
-        
-    - name: print buffer files
-      teags: run
+    
+    - name: print buffer folder
       shell: ls buffer/
       
     - name: Copy the key add to authorized_keys using Ansible module
