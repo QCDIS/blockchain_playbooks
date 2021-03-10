@@ -1,58 +1,26 @@
 ---
 - name: Exchange Keys between servers
-  become: yes
   hosts: all
   tasks:
-  
   - name: SSH KeyGen command
     tags: run
-    shell: > 
-      ssh-keygen -q -b 2048 -t rsa -N "" -C "creating SSH" -f ~/.ssh/id_rsa
-      creates="~/.ssh/id_rsa"
-    
-#   - name: delete /tmp/ssh/ dir
-#     file: path=/tmp/ssh/ state=absent
-#     run_once: true
-    
-#   - name: fetch copy  
-#     fetch: 
-#       src: /root/.ssh/id_rsa.pub 
-#       dest: /tmp/ssh/
-#       flat: yes
-    
-#   - name: append file authorized_keys.log  
-#     shell: find /tmp/ssh/* -type f -exec sh -c 'cat {}>>/tmp/ssh/authorized_keys.log' \;
-#     run_once: true
-    
-#   - name: copy authorized_keys  
-#     copy: 
-#       src: /tmp/ssh/authorized_keys.log 
-#       dest: /root/.ssh/authorized_keys 
-#       mode: 0600
-#     tags: install ssh
-     
-#     - name: SSH KeyGen command
-#       tags: run
-#       shell: > 
-#         ssh-keygen -q -b 2048 -t rsa -N "" -C "creating SSH" -f ~/.ssh/id_rsa
-#         creates="~/.ssh/id_rsa"
+    shell: >
+        ssh-keygen -q -b 2048 -t rsa -N "" -C "creating SSH" -f ~/.ssh/id_rsa
+        creates="~/.ssh/id_rsa"
 
-#     - name: Fetch the keyfile from one server to another
-#       tags: run
-#       fetch: 
-#         src: "~/.ssh/id_rsa.pub"
-#         dest: "buffer/{{ansible_hostname}}-id_rsa.pub"
-#         flat: yes
-    
-#     - name: print buffer folder
-#       shell: ls buffer/
-      
-#     - name: Copy the key add to authorized_keys using Ansible module
-#       tags: run
-#       authorized_key:
-#         user: vm-user
-#         state: present
-#         key: "{{ lookup('file','buffer/{{item}}-id_rsa.pub')}}"
-#       when: "{{ item != ansible_hostname }}"
-#       with_items: 
-#         - "{{ groups['all'] }}"
+  - name: Fetch the keyfile from the node to master
+    tags: run
+    fetch:
+      src: "~/.ssh/id_rsa.pub"
+      dest: "buffer/{{ansible_hostname}}-id_rsa.pub"
+    flat: yes
+
+  - name: Copy the key add to authorized_keys using Ansible module
+    tags: runcd
+    authorized_key:
+      user: vagrant
+      state: present
+      key: "{{ lookup('file','buffer/{{item}}-id_rsa.pub')}}"
+    when: "{{ item != ansible_hostname }}"
+    with_items:
+    - "{{ groups['multi'] }}"
