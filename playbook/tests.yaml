@@ -3,7 +3,7 @@
   gather_facts: no
   tasks:  
   - name: host files 
-    shell: cat /etc/hosts
+    shell: cat /root/.ssh/authorized_keys
 #     args:
 #       chdir: /root/caliper-bench/azure-3nodes/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/
 
