@@ -1,32 +1,36 @@
 ---
-- name: Generate SSH keys
-  shell: ssh-keygen -b 2048 -t rsa -q -N '' -f "{{ ansible_env.HOME }}/.ssh/id_rsa"
-  args:
-    creates: "{{ ansible_env.HOME }}/.ssh/id_rsa"
+- name: Exchange Keys between servers
+  hosts: all
+  tasks:
 
-- name: Grab SSH keys
-  shell: cat "{{ ansible_env.HOME }}/.ssh/id_rsa.pub"
-  register: ssh_pub
+  - name: Generate SSH keys
+    shell: ssh-keygen -b 2048 -t rsa -q -N '' -f "{{ ansible_env.HOME }}/.ssh/id_rsa"
+    args:
+      creates: "{{ ansible_env.HOME }}/.ssh/id_rsa"
 
-- local_action: command bash -c 'echo {{ ssh_pub.stdout }} >> {{ ansible_env.HOME }}/.ssh/sshpubs.rslt'
+  - name: Grab SSH keys
+    shell: cat "{{ ansible_env.HOME }}/.ssh/id_rsa.pub"
+    register: ssh_pub
 
-- name: Deliver Grabbed SSH keys
-  authorized_key:
-      user: "{{ ansible_user }}"
-      key: "{{ lookup('file', ansible_env.HOME+'/.ssh/sshpubs.rslt') }}"
-      state: present
-      exclusive: yes
+  - local_action: command bash -c 'echo {{ ssh_pub.stdout }} >> {{ ansible_env.HOME }}/.ssh/sshpubs.rslt'
 
-- name: Turn off StrictHostKeyChecking
-  blockinfile:
-    dest: "{{ ansible_env.HOME }}/.ssh/config"
-    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ hostvars[item]['inventory_hostname'] }}"
-    insertafter: EOF
-    create: yes
-    block: |
-      Host {{ hostvars[item]['inventory_hostname'] }}
-        StrictHostKeyChecking no
-  with_items:
-      - "{{ groups['all'] }}"
+  - name: Deliver Grabbed SSH keys
+    authorized_key:
+        user: "{{ ansible_user }}"
+        key: "{{ lookup('file', ansible_env.HOME+'/.ssh/sshpubs.rslt') }}"
+        state: present
+        exclusive: yes
 
-- local_action: command bash -c 'rm -rf {{ ansible_env.HOME }}/.ssh/sshpubs.rslt'
+  - name: Turn off StrictHostKeyChecking
+    blockinfile:
+      dest: "{{ ansible_env.HOME }}/.ssh/config"
+      marker: "# {mark} ANSIBLE MANAGED BLOCK {{ hostvars[item]['inventory_hostname'] }}"
+      insertafter: EOF
+      create: yes
+      block: |
+        Host {{ hostvars[item]['inventory_hostname'] }}
+          StrictHostKeyChecking no
+    with_items:
+        - "{{ groups['all'] }}"
+
+  - local_action: command bash -c 'rm -rf {{ ansible_env.HOME }}/.ssh/sshpubs.rslt'
