@@ -3,6 +3,12 @@
   gather_facts: no
   tasks:
   
+  - name: install stress
+    shell: apt install stress
+    
+  - name: install iperf
+    shell: apt install iperf
+    
   - name: Download install.sh
     get_url:
       url: https://raw.githubusercontent.com/QCDIS/blockchain_deplyment/master/install.sh

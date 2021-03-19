@@ -1,0 +1,7 @@
+- hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+  
+  - name: test CPU
+    shell: stress -i 2 -d 4 --hdd-bytes 512M -t 100

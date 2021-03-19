@@ -1,0 +1,7 @@
+- hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+  
+  - name: test CPU
+    shell: iperf3 -t 30 -c 20.71.112.11 -i 1 -p 5201 -w 32M -P 4
