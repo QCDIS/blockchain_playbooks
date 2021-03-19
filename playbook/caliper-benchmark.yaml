@@ -32,6 +32,6 @@
       chdir: /root/caliper-bench/azure-3nodes/monitor/
   
   - name: Test 
-    cmd: npx caliper benchmark run --caliper-benchconfig benchmarks/samples/fabric/marbles/config.yaml --caliper-networkconfig networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/fabric-ccp-go-tls.yaml --caliper-workspace .
+    shell: npx caliper benchmark run --caliper-benchconfig benchmarks/samples/fabric/marbles/config.yaml --caliper-networkconfig networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/fabric-ccp-go-tls.yaml --caliper-workspace .
     args:
       chdir: /root/caliper-bench/azure-3nodes/caliper-benchmarks/
