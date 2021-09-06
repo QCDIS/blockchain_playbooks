@@ -12,5 +12,8 @@
 - name: bootstrap
   shell: /tmp/bootstrap.sh 1.4.4 
   
-- shell: cd /tmp/fabric-samples && git checkout v1.4.4
+- git: 
+    repo: 'https://github.com/hyperledger/fabric-samples.git'
+    dest: /tmp/fabric-samples
+    version: v1.4.4
   
