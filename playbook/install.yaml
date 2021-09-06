@@ -3,6 +3,13 @@
   gather_facts: no
   tasks:
   
+  - apt:
+      upgrade: yes
+      update_cache: yes
+      autoremove: yes
+      autoclean: yes
+    
+  
   - name: install packages
     package: 
       name:
