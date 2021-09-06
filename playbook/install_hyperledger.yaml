@@ -1,7 +1,7 @@
-- name: create hyperledger dir
-  file:
-    path: ~/.bashrc/src/github.com/hyperledger
-    state: directory
+# - name: create hyperledger dir
+#   file:
+#     path: ~/.bashrc/src/github.com/hyperledger
+#     state: directory
     
 - name: Download bootstrap.sh
   get_url:
