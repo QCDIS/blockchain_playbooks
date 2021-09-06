@@ -3,11 +3,21 @@
   gather_facts: no
   tasks:
   
-  - name: Download 
-    get_url:
-      url: https://raw.githubusercontent.com/QCDIS/blockchain_deplyment/master/install-caliper.sh
-      dest: /tmp/install-caliper.sh
-      mode: '777'
+  - name: install packages
+    package: 
+      name:
+        - make
+        - iperf
+        - golang-go
+        - nodejs 
+        - npm
+      state: present
   
-  - name: install 
-    shell: bash /tmp/install-caliper.sh
+#   - name: Download 
+#     get_url:
+#       url: https://raw.githubusercontent.com/QCDIS/blockchain_deplyment/master/install-caliper.sh
+#       dest: /tmp/install-caliper.sh
+#       mode: '777'
+  
+#   - name: install 
+#     shell: bash /tmp/install-caliper.sh
