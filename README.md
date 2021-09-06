@@ -1,3 +1,17 @@
+# The order of using Playbooks 
+
+1. install.yaml
+
+2. install-caliper.yaml
+
+3. create_swarm_cluster.yaml
+
+VMs need to join the swarm cluster through inter IP address 
+
+4. install_hyperledger.yaml
+
+5. caliper-benchmark.yaml
+
 # Hyperledger Fabric Deployment
 This repository is about how to deploy Hyperledger Fabric, Hyperledger Caliper and Monitor tools.
 
