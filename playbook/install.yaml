@@ -9,7 +9,14 @@
         - stress
         - iperf
         - golang-go
+        - nodejs 
+        - npm
       state: present
+
+  - include: docker/install_docker.yaml
+  
+  - include: install_hyperledger.yaml
+    
     
 #   - name: Download install.sh
 #     get_url:
