@@ -51,14 +51,14 @@
       register: docker_node_info
       
     - debug:
-        var: docker_node_info     
+        var: docker_node_info['nodes']  
       
     - docker_node:
         hostname: "{{item['Description'['Hostname']}}"
         labels:
           app: caliper
         labels_state: replace
-      loop: docker_node_info.nodes
+      loop: docker_node_info['nodes']
       when: "'Leader' in item['ManagerStatus'] and item['ManagerStatus']['Leader']"
       
       
@@ -67,5 +67,5 @@
         labels:
           app: fabric
         labels_state: replace
-      loop: docker_node_info.nodes
+      loop: docker_node_info['nodes']
       when: "'Leader' not in item['ManagerStatus']"
