@@ -18,6 +18,7 @@
         - golang-go
         - nodejs 
         - npm
+        - pip
       state: present
       
   - npm:
