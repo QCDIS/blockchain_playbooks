@@ -52,7 +52,7 @@
       
     - debug:
         var: item 
-      loop: docker_node_info['nodes']  | dict2items
+      with_items: docker_node_info['nodes']
       
     - docker_node:
         hostname: "{{item['Description'['Hostname']}}"
