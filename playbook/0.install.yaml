@@ -21,6 +21,10 @@
         - python3-pip
       state: present
       
+  - pip:
+      name: docker
+   
+      
   - npm:
       name: n
       global: yes
