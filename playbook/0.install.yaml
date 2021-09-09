@@ -34,6 +34,8 @@
       
   - shell: npm install npm@6.4.1 -g
 
+  - include: ec2/ec2_mount.yaml
+
   - include: docker/install_docker.yaml
   
   - include: install_hyperledger.yaml
