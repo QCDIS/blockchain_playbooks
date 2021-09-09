@@ -59,7 +59,7 @@
           app: caliper
         labels_state: replace
       loop: docker_node_info['nodes']
-      when: 'Leader' in item['ManagerStatus'] and item['ManagerStatus']['Leader']
+      when: "'Leader' in item['ManagerStatus'] and item['ManagerStatus']['Leader']"
       
       
     - docker_node:
@@ -68,4 +68,4 @@
           app: fabric
         labels_state: replace
       loop: docker_node_info['nodes']
-      when:  'Leader' not in item['ManagerStatus']
+      when: "'Leader' not in item['ManagerStatus']"
