@@ -52,7 +52,7 @@
 
       
     - docker_node:
-        hostname: "{{item['Description'['Hostname']}}"
+        hostname: "{{item['Description']['Hostname']}}"
         labels:
           app: caliper
         labels_state: replace
@@ -61,7 +61,7 @@
       
       
     - docker_node:
-        hostname: "{{item['Description'['Hostname']}}"
+        hostname: "{{item['Description']['Hostname']}}"
         labels:
           app: fabric
         labels_state: replace
