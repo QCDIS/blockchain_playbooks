@@ -61,5 +61,5 @@
         labels:
           app: caliper
         labels_state: replace
-      loop: docker_node_info.nodes
+      loop: docker_node_info['nodes']
       when: item['Spec']['Role'] == "manager"
