@@ -2,6 +2,10 @@
 - hosts: client
   become: yes
   tasks:    
+  
+  - pip:
+      name: docker
+    
     
   - name: Init a new swarm with default parameters
     docker_swarm:
