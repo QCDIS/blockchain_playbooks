@@ -18,7 +18,7 @@
       global: yes
     with_items:
       - "node-gyp"
-      - "npx"
+      - "npx"      
       
   - shell: npm install -g --only=prod @hyperledger/caliper-cli@0.3.0
   
