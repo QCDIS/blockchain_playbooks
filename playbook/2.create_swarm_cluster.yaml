@@ -2,10 +2,7 @@
 - hosts: client
   become: yes
   tasks:    
-  
-  - pip:
-      name: docker
-    
+      
     
   - name: Init a new swarm with default parameters
     docker_swarm:
@@ -62,4 +59,13 @@
           app: caliper
         labels_state: replace
       loop: docker_node_info['nodes']
-      when: item['Spec']['Role'] == "manager"
+      when: 'Leader' in item['ManagerStatus'] and item['ManagerStatus']['Leader']
+      
+      
+    - docker_node:
+        hostname: "{{item['Description'['Hostname']}}"
+        labels:
+          app: fabric
+        labels_state: replace
+      loop: docker_node_info['nodes']
+      when: not 'Leader' in item['ManagerStatus']
