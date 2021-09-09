@@ -33,9 +33,9 @@
       
   - shell: npm install npm@6.4.1 -g
 
-#   - include: docker/install_docker.yaml
+  - include: docker/install_docker.yaml
   
-#   - include: install_hyperledger.yaml
+  - include: install_hyperledger.yaml
     
     
 #   - name: Download install.sh
