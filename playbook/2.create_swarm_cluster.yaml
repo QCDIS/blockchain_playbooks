@@ -29,7 +29,7 @@
       var: hostvars['client']['ansible_host']
 
 
-  - name: "Join as a manager"
+  - name: "Join"
     become: yes
     become_user: "root"
     docker_swarm:
@@ -39,3 +39,23 @@
       remote_addrs: ["{{  hostvars['client']['ansible_host'] }}:2377" ]
     retries: 3
     delay: 15
+    
+    
+- hosts: client
+  become: yes
+  tasks:
+    
+    
+    - docker_node_info:
+      register: docker_node_info
+      
+    - debug:
+        var: docker_node_info
+
+      
+      
+#   - docker_node:
+#       hostname: mynode
+#       labels:
+#         key: value
+#       labels_state: replace
