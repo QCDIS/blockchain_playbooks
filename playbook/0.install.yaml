@@ -19,10 +19,19 @@
         - nodejs 
         - npm
       state: present
-
-  - include: docker/install_docker.yaml
+      
+  - npm:
+      name: n
+      
+  - shell: n 10.15.3
   
-  - include: install_hyperledger.yaml
+  - npm:
+      name: npm
+      version: '6.4.1'
+
+#   - include: docker/install_docker.yaml
+  
+#   - include: install_hyperledger.yaml
     
     
 #   - name: Download install.sh
