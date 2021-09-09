@@ -28,6 +28,7 @@
   - npm:
       name: npm
       version: '6.4.1'
+      global: yes
 
 #   - include: docker/install_docker.yaml
   
