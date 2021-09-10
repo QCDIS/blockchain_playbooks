@@ -9,37 +9,37 @@
         dest: /tmp/conf
         version: "{{release}}"
     
-    - shell: curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.1 1.4.1 0.4.15 -ds
-    - shell: ./bin/cryptogen generate --config=/tmp/conf/crypto-config.yaml
-    - shell: ./bin/configtxgen -profile OrdererGenesis -outputBlock genesis.block -channelID syschannel
-    - shell: ./bin/configtxgen -profile ChannelConfig -outputCreateChannelTx mychannel.tx -channelID mychannel
+#     - shell: curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.1 1.4.1 0.4.15 -ds
+#     - shell: ./bin/cryptogen generate --config=/tmp/conf/crypto-config.yaml
+#     - shell: ./bin/configtxgen -profile OrdererGenesis -outputBlock genesis.block -channelID syschannel
+#     - shell: ./bin/configtxgen -profile ChannelConfig -outputCreateChannelTx mychannel.tx -channelID mychannel
 
-- hosts: workers
-  become: yes
-  gather_facts: no
-  tasks:
+# - hosts: workers
+#   become: yes
+#   gather_facts: no
+#   tasks:
   
-    - git:
-        repo: "{{config_repo_url}}"
-        dest: /tmp/conf
-        version: "{{release}}"
+#     - git:
+#         repo: "{{config_repo_url}}"
+#         dest: /tmp/conf
+#         version: "{{release}}"
         
 
-- hosts: client
-  become: yes
-  gather_facts: no
-  tasks:    
+# - hosts: client
+#   become: yes
+#   gather_facts: no
+#   tasks:    
 
-    - docker_network:
-        name: caliper-overlay 
-        driver: overlay 
+#     - docker_network:
+#         name: caliper-overlay 
+#         driver: overlay 
         
 
-    - docker_stack:
-        state: present
-        name: prometheus
-        compose:
-          - /tmp/conf/monitor/swarm-compose.yaml
+#     - docker_stack:
+#         state: present
+#         name: prometheus
+#         compose:
+#           - /tmp/conf/monitor/swarm-compose.yaml
   
-    - name: Test 
-      shell: caliper benchmark run --caliper-benchconfig /tmp/conf/fabric/config.yaml --caliper-networkconfig /tmp/conf/fabric/networks/fabric.yaml --caliper-workspace .
+#     - name: Test 
+#       shell: caliper benchmark run --caliper-benchconfig /tmp/conf/fabric/config.yaml --caliper-networkconfig /tmp/conf/fabric/networks/fabric.yaml --caliper-workspace .
