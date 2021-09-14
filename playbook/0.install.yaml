@@ -13,6 +13,7 @@
   - name: install packages
     package: 
       name:
+        - make
         - stress
 #         - iperf
         - golang-go
