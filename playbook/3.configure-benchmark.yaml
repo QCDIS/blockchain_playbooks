@@ -1,0 +1,42 @@
+---
+- hosts: client
+  become: yes
+  gather_facts: no
+  tasks:
+  
+    - git:
+        repo: "{{config_repo_url}}"
+        dest: /tmp/conf
+        version: "{{release}}"
+    
+#     - shell: curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.1 1.4.1 0.4.15 -ds
+    - shell: cd /tmp/conf/networks/fabric/fabric-v1.4.1/config/ && /tmp/conf/bin/cryptogen generate --config=/tmp/conf/networks/fabric/fabric-v1.4.1/config/crypto-config.yaml
+    - shell: cd /tmp/conf/networks/fabric/fabric-v1.4.1/config/ && /tmp/conf/bin/configtxgen -profile OrdererGenesis -outputBlock genesis.block -channelID syschannel
+    - shell: cd /tmp/conf/networks/fabric/fabric-v1.4.1/config/ && /tmp/conf/bin/configtxgen -profile ChannelConfig -outputCreateChannelTx mychannel.tx -channelID mychannel
+   
+    - fetch:
+         src: /tmp/conf/crypto-config
+         dest: /tmp/conf/networks/fabric/fabric-v1.4.1/config
+         
+    - fetch:
+         src: /tmp/conf/genesis.block 
+         dest: /tmp/conf/networks/fabric/fabric-v1.4.1/config
+         
+         
+    - fetch:
+         src: /tmp/conf/mychannel.tx
+         dest: /tmp/conf/networks/fabric/fabric-v1.4.1/config
+     
+     
+     
+# copy conf files to works 
+- hosts: workers
+  become: yes
+  gather_facts: no
+  tasks:
+  
+    - git:
+        repo: "{{config_repo_url}}"
+        dest: /tmp/conf
+        version: "{{release}}"
+        
