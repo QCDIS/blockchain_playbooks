@@ -15,4 +15,4 @@
           - /tmp/conf/monitor/swarm-compose.yaml
   
     - name: Test 
-      shell: caliper benchmark run --caliper-benchconfig /tmp/conf/fabric/config.yaml --caliper-networkconfig /tmp/conf/fabric/networks/fabric.yaml --caliper-workspace .
+      shell: caliper benchmark run --caliper-benchconfig /tmp/conf/benchmarks/samples/fabric/marbles/config.yaml --caliper-networkconfig /tmp/conf/networks/fabric/fabric-v1.4.1/fabric.yaml --caliper-workspace .
