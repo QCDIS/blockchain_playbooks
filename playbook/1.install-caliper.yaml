@@ -11,7 +11,7 @@
 # #         - golang-go
 # #         - nodejs 
 # #         - npm
-      state: present
+#       state: present
       
   - npm:
       name: "{{item}}"
