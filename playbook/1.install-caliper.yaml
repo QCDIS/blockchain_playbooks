@@ -7,10 +7,10 @@
     package: 
       name:
         - make
-        - iperf
-        - golang-go
-        - nodejs 
-        - npm
+#         - iperf
+#         - golang-go
+#         - nodejs 
+#         - npm
       state: present
       
   - npm:
