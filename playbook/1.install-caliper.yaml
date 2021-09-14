@@ -22,7 +22,7 @@
       
       
 #     use this blockchain_playbooks/install-caliper.sh 
-  - shell: npm install -g --only=prod @hyperledger/caliper-cli@0.3.0
+  - shell: npm install -g --only=prod @hyperledger/caliper-cli@0.2.0
   
   - shell: npm install -g npm@latest --no-optional
   
