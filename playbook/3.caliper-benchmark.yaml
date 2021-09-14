@@ -14,48 +14,48 @@
     - shell: cd /tmp/conf/networks/fabric/fabric-v1.4.1/config/ && /tmp/conf/bin/configtxgen -profile OrdererGenesis -outputBlock genesis.block -channelID syschannel
     - shell: cd /tmp/conf/networks/fabric/fabric-v1.4.1/config/ && /tmp/conf/bin/configtxgen -profile ChannelConfig -outputCreateChannelTx mychannel.tx -channelID mychannel
    
-    - fetch:
-         src: /tmp/conf/crypto-config
-         dest: /tmp/conf/networks/fabric/fabric-v1.4.1/config
+#     - fetch:
+#          src: /tmp/conf/crypto-config
+#          dest: /tmp/conf/networks/fabric/fabric-v1.4.1/config
          
-    - fetch:
-         src: /tmp/conf/genesis.block 
-         dest: /tmp/conf/networks/fabric/fabric-v1.4.1/config
+#     - fetch:
+#          src: /tmp/conf/genesis.block 
+#          dest: /tmp/conf/networks/fabric/fabric-v1.4.1/config
          
          
-    - fetch:
-         src: /tmp/conf/mychannel.tx
-         dest: /tmp/conf/networks/fabric/fabric-v1.4.1/config
+#     - fetch:
+#          src: /tmp/conf/mychannel.tx
+#          dest: /tmp/conf/networks/fabric/fabric-v1.4.1/config
      
      
      
-
-- hosts: workers
-  become: yes
-  gather_facts: no
-  tasks:
-  
-    - git:
-        repo: "{{config_repo_url}}"
-        dest: /tmp/conf
-        version: "{{release}}"
-        
-
-# - hosts: client
+# copy conf files to works 
+# - hosts: workers
 #   become: yes
 #   gather_facts: no
-#   tasks:    
-
-#     - docker_network:
-#         name: caliper-overlay 
-#         driver: overlay 
+#   tasks:
+  
+#     - git:
+#         repo: "{{config_repo_url}}"
+#         dest: /tmp/conf
+#         version: "{{release}}"
         
 
-#     - docker_stack:
-#         state: present
-#         name: prometheus
-#         compose:
-#           - /tmp/conf/monitor/swarm-compose.yaml
+- hosts: client
+  become: yes
+  gather_facts: no
+  tasks:    
+
+    - docker_network:
+        name: caliper-overlay 
+        driver: overlay 
+        
+
+    - docker_stack:
+        state: present
+        name: prometheus
+        compose:
+          - /tmp/conf/monitor/swarm-compose.yaml
   
-#     - name: Test 
-#       shell: caliper benchmark run --caliper-benchconfig /tmp/conf/fabric/config.yaml --caliper-networkconfig /tmp/conf/fabric/networks/fabric.yaml --caliper-workspace .
+    - name: Test 
+      shell: caliper benchmark run --caliper-benchconfig /tmp/conf/fabric/config.yaml --caliper-networkconfig /tmp/conf/fabric/networks/fabric.yaml --caliper-workspace .
