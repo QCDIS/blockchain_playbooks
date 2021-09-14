@@ -23,7 +23,9 @@
       state: present
       
   - pip:
-      name: docker
+      name: 
+        - docker
+        - jsondiff
    
       
   - npm:
