@@ -14,7 +14,7 @@
     package: 
       name:
         - stress
-        - iperf
+#         - iperf
         - golang-go
         - nodejs 
         - npm
