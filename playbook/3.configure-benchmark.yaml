@@ -15,30 +15,18 @@
     - shell: cd /tmp/conf/networks/fabric/fabric-v1.4.1/config/ && /tmp/conf/bin/configtxgen -profile OrdererGenesis -outputBlock genesis.block -channelID syschannel
     - shell: cd /tmp/conf/networks/fabric/fabric-v1.4.1/config/ && /tmp/conf/bin/configtxgen -profile ChannelConfig -outputCreateChannelTx mychannel.tx -channelID mychannel
    
-#     - fetch:
-#          src: /tmp/conf/crypto-config
-#          dest: /tmp/conf/networks/fabric/fabric-v1.4.1/config
+    - fetch:
+         src: /tmp/conf
+         dest: /tmp
          
-#     - fetch:
-#          src: /tmp/conf/genesis.block 
-#          dest: /tmp/conf/networks/fabric/fabric-v1.4.1/config
-         
-         
-#     - fetch:
-#          src: /tmp/conf/mychannel.tx
-#          dest: /tmp/conf/networks/fabric/fabric-v1.4.1/config
      
-     
-     
-# # copy conf files to works 
-# - hosts: workers
-#   become: yes
-#   gather_facts: no
-#   tasks:
+
+- hosts: workers
+  become: yes
+  gather_facts: no
+  tasks:
   
-#     - git:
-#         repo: "{{config_repo_url}}"
-#         dest: /tmp/conf
-#         version: "{{release}}"
-#         force: yes
+    - copy:
+        src: /tmp/conf
+        dest: /tmp
         
