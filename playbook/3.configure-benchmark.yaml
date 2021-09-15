@@ -35,3 +35,9 @@
         src: /tmp/conf.zip
         dest: /tmp
         
+
+    - unarchive:
+        src: /tmp/conf.zip
+        dest: /tmp/conf
+    
+        
