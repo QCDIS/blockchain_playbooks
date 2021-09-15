@@ -18,7 +18,7 @@
         
     - fetch:
         src: /tmp/conf/networks/fabric/fabric-v1.4.1/config/{{item}}
-        dest: /tmp
+        dest: /tmp/
       with_items:
         - "crypto-config.yaml"
         - "genesis.block"
