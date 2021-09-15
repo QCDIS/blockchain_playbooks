@@ -14,11 +14,16 @@
     - shell: cd /tmp/conf/networks/fabric/fabric-v1.4.1/config/ && /tmp/conf/bin/cryptogen generate --config=/tmp/conf/networks/fabric/fabric-v1.4.1/config/crypto-config.yaml
     - shell: cd /tmp/conf/networks/fabric/fabric-v1.4.1/config/ && /tmp/conf/bin/configtxgen -profile OrdererGenesis -outputBlock genesis.block -channelID syschannel
     - shell: cd /tmp/conf/networks/fabric/fabric-v1.4.1/config/ && /tmp/conf/bin/configtxgen -profile ChannelConfig -outputCreateChannelTx mychannel.tx -channelID mychannel
-   
-    - fetch:
-         src: /tmp/conf
-         dest: /tmp
+
          
+         
+    - archive:
+        path: /tmp/conf
+        dest: /tmp/conf.zip
+        
+    - fetch:
+         src: /tmp/conf.zip
+         dest: /tmp
      
 
 - hosts: workers
@@ -27,6 +32,6 @@
   tasks:
   
     - copy:
-        src: /tmp/conf
+        src: /tmp/conf.zip
         dest: /tmp
         
