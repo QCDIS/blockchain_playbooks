@@ -17,7 +17,7 @@
 
         
     - fetch:
-        src: /tmp/conf/networks/fabric/fabric-v1.4.1/config/"{{item}}"
+        src: /tmp/conf/networks/fabric/fabric-v1.4.1/config/{{item}}
         dest: /tmp
       with_items:
         - "crypto-config.yaml"
@@ -37,7 +37,7 @@
         
         
     - copy:
-        src: /tmp/"{{item}}"
+        src: /tmp/{{item}}
         dest: /tmp/conf
       with_items:
         - "crypto-config.yaml"
