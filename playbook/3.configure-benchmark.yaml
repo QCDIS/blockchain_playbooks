@@ -15,15 +15,15 @@
     - shell: cd /tmp/conf/networks/fabric/fabric-v1.4.1/config/ && /tmp/conf/bin/configtxgen -profile OrdererGenesis -outputBlock genesis.block -channelID syschannel
     - shell: cd /tmp/conf/networks/fabric/fabric-v1.4.1/config/ && /tmp/conf/bin/configtxgen -profile ChannelConfig -outputCreateChannelTx mychannel.tx -channelID mychannel
 
-         
-         
-    - archive:
-        path: /tmp/conf
-        dest: /tmp/conf.zip
         
     - fetch:
-         src: /tmp/conf.zip
-         dest: /tmp
+        src: /tmp/conf/networks/fabric/fabric-v1.4.1/config/"{{item}}"
+        dest: /tmp
+      with_items:
+        - "crypto-config.yaml"
+        - "genesis.block"
+        - "mychannel.tx"
+       
      
 
 - hosts: workers
@@ -31,13 +31,22 @@
   gather_facts: no
   tasks:
   
+    - ansible.builtin.file:
+        path: /tmp/conf
+        state: directory
+        
+        
     - copy:
-        src: /tmp/conf.zip
-        dest: /tmp
+        src: /tmp/"{{item}}"
+        dest: /tmp/conf
+      with_items:
+        - "crypto-config.yaml"
+        - "genesis.block"
+        - "mychannel.tx"
         
 
-    - unarchive:
-        src: /tmp/conf.zip
-        dest: /tmp/conf
+
+    
+
     
         
