@@ -19,7 +19,6 @@
     - fetch:
         src: /tmp/conf/networks/fabric/fabric-v1.4.1/config/{{item}}
         dest: /tmp/
-        flat: yes
       with_items:
         - "crypto-config.yaml"
         - "genesis.block"
@@ -39,12 +38,12 @@
         
         
     - copy:
-        src: /tmp/client/tmp/{{item}}
+        src: /tmp/client/tmp/conf/networks/fabric/fabric-v1.4.1/config/genesis.block
         dest: /tmp/conf
-      with_items:
-        - "crypto-config.yaml"
-        - "genesis.block"
-        - "mychannel.tx"
+#       with_items:
+#         - "crypto-config.yaml"
+#         - "genesis.block"
+#         - "mychannel.tx"
         
 
 
