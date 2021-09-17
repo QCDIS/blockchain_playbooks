@@ -21,23 +21,11 @@
         patterns: '*_sk'
         recurse: yes
       register: certs
-      
-#     - file:
-#         path: "{{ item.path }}"
-#         state: absent
-#       with_items: "{{ certs.files }}"
-  
-    - debug:
-        var: item
-      with_items: "{{ certs.files }}"
-      
-#     - copy: 
-#         remote_src: yes
-#         src: /path/to/foo 
-#         dest: /path/to/bar
-
-  
-    
+            
+    - copy: 
+        remote_src: yes
+        src: "{{ item.path }}"
+        dest: "{{ item.path | dirname}}/key.pem"
         
     - fetch:
         src: "{{conf_path}}/{{item}}"
