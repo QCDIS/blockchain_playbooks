@@ -19,6 +19,7 @@
     - find:
         paths: "/tmp/conf/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/crypto-config/"
         patterns: '*_sk'
+        recurse: yes
       register: certs
       
 #     - file:
