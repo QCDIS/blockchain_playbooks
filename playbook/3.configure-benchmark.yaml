@@ -23,12 +23,13 @@
         - "crypto-config.yaml"
         - "genesis.block"
         - "mychannel.tx"
+      register: fetch_output
         
     - shell: ls -lah /tmp/
       register: out
       
     - debug:
-        var: out
+        var: fetch_output
        
      
 
