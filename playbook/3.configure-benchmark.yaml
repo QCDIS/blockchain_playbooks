@@ -24,7 +24,7 @@
     
         
     - fetch:
-        src: {{conf_path}}/{{item}}
+        src: "{{conf_path}}/{{item}}"
         dest: /tmp/
       with_items:
         - "crypto-config.yaml"
@@ -45,7 +45,7 @@
         
         
     - copy:
-        src: /tmp/client/{{conf_path}}/{{item}}
+        src: "/tmp/client/{{conf_path}}/{{item}}"
         dest: /tmp/conf
       with_items:
         - "crypto-config.yaml"
