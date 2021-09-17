@@ -44,7 +44,7 @@
         
         
     - copy:
-        src: /tmp/{{item}}
+        src: /tmp/client/tmp/{{item}}
         dest: /tmp/conf
       with_items:
         - "crypto-config.yaml"
