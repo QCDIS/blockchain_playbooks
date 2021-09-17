@@ -26,6 +26,7 @@
         remote_src: yes
         src: "{{ item.path }}"
         dest: "{{ item.path | dirname}}/key.pem"
+      with_item: "{{certs.files}}"
         
     - fetch:
         src: "{{conf_path}}/{{item}}"
