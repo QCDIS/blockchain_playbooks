@@ -16,3 +16,7 @@
   
     - name: Test 
       shell: cd /tmp/conf/caliper-benchmarks && npx caliper benchmark run --caliper-benchconfig benchmarks/samples/fabric/marbles/config.yaml --caliper-networkconfig networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/fabric-ccp-go-tls.yaml --caliper-workspace .
+      register: output
+      
+    - debug:
+        var: output
