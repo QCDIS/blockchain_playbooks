@@ -23,6 +23,8 @@
         - "crypto-config.yaml"
         - "genesis.block"
         - "mychannel.tx"
+        
+    - shell: ls -lah /tmp/
        
      
 
