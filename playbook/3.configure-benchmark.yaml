@@ -25,6 +25,10 @@
         - "mychannel.tx"
         
     - shell: ls -lah /tmp/
+      register: out
+      
+    - debug:
+        var: out
        
      
 
