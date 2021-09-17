@@ -11,7 +11,8 @@
     register: join_cmd
 
   - debug:
-      var: join_cmd
+      var: ansible_all_ipv4_addresses | ipaddr('private') | first
+
       
     
   - name: Add join cmd to dummy host
