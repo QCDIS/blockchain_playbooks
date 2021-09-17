@@ -12,15 +12,30 @@
         version: "{{release}}"
         force: yes
             
-#     - shell: curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.1 1.4.1 0.4.15 -ds
     - shell: cd "{{conf_path}}" && /tmp/conf/caliper-benchmarks/bin/cryptogen generate --config="{{conf_path}}"/crypto-config.yaml
     - shell: cd "{{conf_path}}" && /tmp/conf/caliper-benchmarks/bin/configtxgen -profile OrdererGenesis -outputBlock genesis.block -channelID syschannel
     - shell: cd "{{conf_path}}" && /tmp/conf/caliper-benchmarks/bin/configtxgen -profile ChannelConfig -outputCreateChannelTx mychannel.tx -channelID mychannel
 
+    - find:
+        paths: "/tmp/conf/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/crypto-config/"
+        patterns: '*_sk'
+      register: certs
+      
+#     - file:
+#         path: "{{ item.path }}"
+#         state: absent
+#       with_items: "{{ certs.files }}"
+  
+    - debug:
+        var: item
+      with_items: "{{ certs.files }}"
+      
+#     - copy: 
+#         remote_src: yes
+#         src: /path/to/foo 
+#         dest: /path/to/bar
 
-#     - archive:
-#         path: /tmp/conf/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/crypto-config
-#         dest: /tmp/conf/caliper-benchmarks/networks/fabric/fabric-v1.4.1/config/crypto-config.zip
+  
     
         
     - fetch:
