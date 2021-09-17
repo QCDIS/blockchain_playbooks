@@ -9,7 +9,7 @@
         dest: /tmp/conf
         version: "{{release}}"
         force: yes
-    
+            
 #     - shell: curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.1 1.4.1 0.4.15 -ds
     - shell: cd /tmp/conf/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/ && /tmp/conf/caliper-benchmarks/bin/cryptogen generate --config=/tmp/conf/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/crypto-config.yaml
     - shell: cd /tmp/conf/caliper-benchmarks/networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/config/ && /tmp/conf/caliper-benchmarks/bin/configtxgen -profile OrdererGenesis -outputBlock genesis.block -channelID syschannel
