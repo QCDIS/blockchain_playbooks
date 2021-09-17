@@ -6,7 +6,6 @@
     
   - name: Init a new swarm with default parameters
     docker_swarm:
-      advertise_addr: 172.31.27.125:2377
       state: present
     register: join_cmd
 
