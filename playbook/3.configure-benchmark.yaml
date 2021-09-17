@@ -18,19 +18,13 @@
         
     - fetch:
         src: /tmp/conf/networks/fabric/fabric-v1.4.1/config/{{item}}
-        dest: /tmp/
+        dest: /tmp/{{item}}
       with_items:
         - "crypto-config.yaml"
         - "genesis.block"
         - "mychannel.tx"
       register: fetch_output
-        
-    - shell: ls -lah /tmp/
-      register: out
-      
-    - debug:
-        var: fetch_output
-       
+            
      
 
 - hosts: workers
