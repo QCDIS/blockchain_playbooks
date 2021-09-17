@@ -18,6 +18,8 @@
   
   - shell: caliper bind --caliper-bind-sut fabric --caliper-bind-sdk 1.4.4 --caliper-bind-cwd ./
   
+  - shell: npm i fabric-client
+  
   
 #   - name: Download 
 #     get_url:
