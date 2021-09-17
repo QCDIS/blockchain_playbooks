@@ -15,4 +15,4 @@
           - /tmp/conf/monitor/swarm-compose.yaml
   
     - name: Test 
-      shell: cd /tmp/conf/azure-3nodes/caliper-benchmarks  npx caliper benchmark run --caliper-benchconfig benchmarks/samples/fabric/marbles/config.yaml --caliper-networkconfig networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/fabric-ccp-go-tls.yaml --caliper-workspace .
+      shell: cd /tmp/conf/caliper-benchmarks && npx caliper benchmark run --caliper-benchconfig benchmarks/samples/fabric/marbles/config.yaml --caliper-networkconfig networks/fabric/fabric-v1.4.1/swarm-3org1peer-raft/fabric-ccp-go-tls.yaml --caliper-workspace .
