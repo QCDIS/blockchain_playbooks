@@ -2,6 +2,11 @@
 #   file:
 #     path: ~/.bashrc/src/github.com/hyperledger
 #     state: directory
+
+- npm:
+    name: fabric-client
+    version: '1.4.18'
+    global: yes
     
 - name: Download bootstrap.sh
   get_url:
