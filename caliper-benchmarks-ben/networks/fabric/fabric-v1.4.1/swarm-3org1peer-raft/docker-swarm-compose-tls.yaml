@@ -46,7 +46,9 @@ services:
         - ./config/crypto-config/peerOrganizations/org1.example.com/tlsca/:/etc/hyperledger/fabric-ca-server-tls
         deploy:
             placement:
-                constraints: [node.hostname == dappvm1]
+                constraints: 
+                  - node.labels.app == fabric
+#                 [node.hostname == dappvm1]
 
     ca_org2_example_com:
         image: hyperledger/fabric-ca:1.4.4
@@ -72,7 +74,9 @@ services:
         - ./config/crypto-config/peerOrganizations/org2.example.com/tlsca/:/etc/hyperledger/fabric-ca-server-tls
         deploy:
             placement:
-                constraints: [node.hostname == dappvm1]
+                constraints: 
+                  - node.labels.app == fabric
+#                 [node.hostname == dappvm1]
 
     ca_org3_example_com:
         image: hyperledger/fabric-ca:1.4.4
@@ -98,7 +102,9 @@ services:
         - ./config/crypto-config/peerOrganizations/org3.example.com/tlsca/:/etc/hyperledger/fabric-ca-server-tls
         deploy:
             placement:
-                constraints: [node.hostname == dappvm1]
+                constraints: 
+                  - node.labels.app == fabric
+#                 [node.hostname == dappvm1]
 
     ca_org4_example_com:
         image: hyperledger/fabric-ca:1.4.4
@@ -124,7 +130,9 @@ services:
         - ./config/crypto-config/peerOrganizations/org4.example.com/tlsca/:/etc/hyperledger/fabric-ca-server-tls
         deploy:
             placement:
-                constraints: [node.hostname == dappvm1]
+                constraints: 
+                  - node.labels.app == fabric
+#                 [node.hostname == dappvm1]
 
 
 ########################################################################
@@ -163,7 +171,9 @@ services:
         - ./config/crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/:/etc/hyperledger/msp/orderer
         deploy:
             placement:
-                constraints: [node.hostname == dappvm1]
+                constraints: 
+                  - node.labels.app == fabric
+#                 [node.hostname == dappvm1]
 
 
     orderer1_example_com:
@@ -198,7 +208,9 @@ services:
         - ./config/crypto-config/ordererOrganizations/example.com/orderers/orderer1.example.com/:/etc/hyperledger/msp/orderer
         deploy:
             placement:
-                constraints: [node.hostname == dappvm1]
+                constraints: 
+                  - node.labels.app == fabric
+#                 [node.hostname == dappvm1]
 
     orderer2_example_com:
         image: hyperledger/fabric-orderer:1.4.4        
@@ -232,7 +244,9 @@ services:
         - ./config/crypto-config/ordererOrganizations/example.com/orderers/orderer2.example.com/:/etc/hyperledger/msp/orderer
         deploy:
             placement:
-                constraints: [node.hostname == dappvm1]
+                constraints: 
+                  - node.labels.app == fabric
+#                 [node.hostname == dappvm1]
 
     orderer3_example_com:
         image: hyperledger/fabric-orderer:1.4.4        
@@ -266,7 +280,9 @@ services:
         - ./config/crypto-config/ordererOrganizations/example.com/orderers/orderer3.example.com/:/etc/hyperledger/msp/orderer
         deploy:
             placement:
-                constraints: [node.hostname == dappvm1]
+                constraints: 
+                  - node.labels.app == fabric
+#                 [node.hostname == dappvm1]
 
 
 ########################################################################
@@ -312,7 +328,9 @@ services:
         - ./config/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/:/etc/hyperledger/msp/peer
         deploy:
             placement:
-                constraints: [node.hostname == dappvm1]
+                constraints: 
+                  - node.labels.app == fabric
+#                 [node.hostname == dappvm1]
 
     peer0_org2_example_com:
         image: hyperledger/fabric-peer:1.4.4
@@ -353,7 +371,9 @@ services:
         - ./config/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/:/etc/hyperledger/msp/peer
         deploy:
             placement:
-                constraints: [node.hostname == dappvm1]
+                constraints: 
+                  - node.labels.app == fabric
+#                 [node.hostname == dappvm1]
 
     peer0_org3_example_com:
         image: hyperledger/fabric-peer:1.4.4
@@ -394,7 +414,9 @@ services:
         - ./config/crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/:/etc/hyperledger/msp/peer
         deploy:
             placement:
-                constraints: [node.hostname == dappvm1]
+                constraints: 
+                  - node.labels.app == fabric
+#                 [node.hostname == dappvm1]
 
     peer0_org4_example_com:
         image: hyperledger/fabric-peer:1.4.4
@@ -435,7 +457,9 @@ services:
         - ./config/crypto-config/peerOrganizations/org4.example.com/peers/peer0.org4.example.com/:/etc/hyperledger/msp/peer
         deploy:
             placement:
-                constraints: [node.hostname == dappvm1]
+                constraints: 
+                  - node.labels.app == fabric
+#                 [node.hostname == dappvm1]
 
 volumes:
   backup-ca1:
