@@ -11,6 +11,7 @@
       - "npx"      
       - "fabric-protos"
       - "fabric-network"
+      - "fabric-tools"
       
   - shell: npm install -g fabric-client --unsafe-perm
         
