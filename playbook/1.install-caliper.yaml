@@ -9,11 +9,11 @@
     with_items:
       - "node-gyp"
       - "npx"      
+      - "fabric-protos"
+      - "fabric-network"
       
   - shell: npm install -g fabric-client --unsafe-perm
-  - shell: npm install -g fabric-network --unsafe-perm
-  
-      
+        
 #     use this blockchain_playbooks/install-caliper.sh 
   - shell: npm install -g --only=prod @hyperledger/caliper-cli@0.2.0
   
