@@ -10,6 +10,7 @@
       - "node-gyp"
       - "npx"      
       
+  - shell: npm install -g fabric-client --unsafe-perm
       
 #     use this blockchain_playbooks/install-caliper.sh 
   - shell: npm install -g --only=prod @hyperledger/caliper-cli@0.2.0
@@ -17,8 +18,7 @@
   - shell: npm install -g npm@latest --no-optional
   
   - shell: caliper bind --caliper-bind-sut fabric --caliper-bind-sdk 1.4.4 --caliper-bind-cwd ./
-  
-  - shell: npm install -g fabric-client --unsafe-perm 
+ 
   
   
 #   - name: Download 
