@@ -35,9 +35,10 @@
     debug:
       var: hostvars['client']['ansible_host']
 
-  - name: remove node
+  - name: reset swarm
     docker_swarm:
       state: absent
+      force: true
     ignore_errors: yes
     
 
