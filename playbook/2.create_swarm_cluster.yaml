@@ -1,8 +1,15 @@
----       
+---        
+  
 - hosts: client
   become: yes
   tasks:    
       
+  - name: reset swarm
+    docker_swarm:
+      state: absent
+      force: true
+    ignore_errors: yes
+
     
   - name: Init a new swarm with default parameters
     docker_swarm:
@@ -28,6 +35,11 @@
     debug:
       var: hostvars['client']['ansible_host']
 
+  - name: remove node
+    docker_swarm:
+      state: absent
+    ignore_errors: yes
+    
 
   - name: "Join"
     become: yes
